@@ -26,7 +26,7 @@ this既不会指向函数本身也不会指向函数的词法作用域，它的�
 
 默认绑定
 顾名思义，这一绑定规则是在其他规则都不适用的情况下的默认使用规则，当函数直接使用不带任何修饰的函数引用进行调用时，它的this指">
-<meta property="og:updated_time" content="2017-04-14T14:54:34.522Z">
+<meta property="og:updated_time" content="2017-04-14T15:06:08.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this 总结">
 <meta name="twitter:description" content="JavaScript中的this的指向常常令人感到疑惑，我们来总结一下this指向的规律。
@@ -194,16 +194,17 @@ this既不会指向函数本身也不会指向函数的词法作用域，它的�
 <p>通过这两种方法给函数绑定的绑定this对象还是可以被修改，因此我们可以采取一种叫做硬绑定的方法</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    foo.call(obj);</div><div class="line">&#125;</div><div class="line"></div><div class="line">bar.call(<span class="built_in">window</span>); <span class="comment">// 2 硬绑定的函数不能修改其 this 指向</span></div><div class="line"></div><div class="line"><span class="comment">// ES5 已经实现了此方法 就是 Function.prototype.bind()</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span>(<span class="params">fn, obj</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> fn.apply(obj, <span class="built_in">arguments</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>new绑定<br> new绑定就是当我们对某一函数使用new操作符时，函数体中的this会被绑定到刚实例化的一个新对象上。<br> new操作符实例化对象时进行的操作：</p>
-<pre><code>1. 创建一个新的对象
-2. 将新对象的原型（__proto__）指向构造函数的原型对象（.prototype）
-3. 将函数体内的this指向新创建的对象并执行函数体内的程序
-4. 如果函数没有返回一个对象则返回新创建的对象，否则返回指定对象
-</code></pre> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.a = x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> foo(<span class="number">2</span>);</div><div class="line"><span class="built_in">console</span>.log(obj.a); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<li><p>new绑定<br> new绑定就是当我们对某一函数使用new操作符时，函数体中的this会被绑定到刚实例化的一个新对象上。<br> new操作符实例化对象时进行的操作</p>
+<ul>
+<li>创建一个新的对象</li>
+<li>将新对象的原型（<strong>proto</strong>）指向构造函数的原型对象（.prototype）</li>
+<li>将函数体内的this指向新创建的对象并执行函数体内的程序</li>
+<li>如果函数没有返回一个对象则返回新创建的对象，否则返回指定对象<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.a = x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> foo(<span class="number">2</span>);</div><div class="line"><span class="built_in">console</span>.log(obj.a); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>优先级<br> 以上规则就是会影响this绑定的所有情况，然后他们有一个优先级，保证在多种情况同时发生的情况下可以确定this的指向，他们的优先级是：</p>
-<pre><code>new绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定
-</code></pre></li>
+</ul>
+</li>
+<li><p>优先级<br> 以上规则就是会影响this绑定的所有情况，然后他们有一个优先级，保证在多种情况同时发生的情况下可以确定this的指向，他们的优先级是<br> <strong><em>new绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</em></strong></p>
+</li>
 <li>一些例外情况：<ul>
 <li>当把null或者undefined传入call, apply, bind, 绑定后，函数会忽略他们然后采用默认绑定this绑定到全局对象</li>
 <li><code>(p.foo = o.foo)()</code> 这种情况会采用默认绑定</li>
