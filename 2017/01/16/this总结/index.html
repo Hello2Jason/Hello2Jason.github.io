@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>this 总结 | Jason&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript中的this的指向常常令人感到疑惑，我们来总结一下this指向的规律。
+首先我们先说明对于this指向的两个误解。
+this既不会指向函数本身也不会指向函数的词法作用域，它的指向是在函数调用时发生绑定，仅与在哪里被调用有关系。
+绑定规则：
+
+默认绑定
+顾名思义，这一绑定规则是在其他规则都不适用的情况下的默认使用规则，当函数直接使用不带任何修饰的函数引用进行调用时，它的this指">
+<meta property="og:type" content="article">
+<meta property="og:title" content="this 总结">
+<meta property="og:url" content="http://yoursite.com/2017/01/16/this总结/index.html">
+<meta property="og:site_name" content="Jason's Blog">
+<meta property="og:description" content="JavaScript中的this的指向常常令人感到疑惑，我们来总结一下this指向的规律。
+首先我们先说明对于this指向的两个误解。
+this既不会指向函数本身也不会指向函数的词法作用域，它的指向是在函数调用时发生绑定，仅与在哪里被调用有关系。
+绑定规则：
+
+默认绑定
+顾名思义，这一绑定规则是在其他规则都不适用的情况下的默认使用规则，当函数直接使用不带任何修饰的函数引用进行调用时，它的this指">
+<meta property="og:updated_time" content="2017-04-14T14:54:34.522Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="this 总结">
+<meta name="twitter:description" content="JavaScript中的this的指向常常令人感到疑惑，我们来总结一下this指向的规律。
+首先我们先说明对于this指向的两个误解。
+this既不会指向函数本身也不会指向函数的词法作用域，它的指向是在函数调用时发生绑定，仅与在哪里被调用有关系。
+绑定规则：
+
+默认绑定
+顾名思义，这一绑定规则是在其他规则都不适用的情况下的默认使用规则，当函数直接使用不带任何修饰的函数引用进行调用时，它的this指">
+  
+    <link rel="alternative" href="/atom.xml" title="Jason&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/assets/imgs/logo.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jason Yang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">积跬步，至千里。</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Hello2Jason/" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://www.weibo.com/u/2585818074" title="weibo">weibo</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Jason Yang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/assets/imgs/logo.png" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jason Yang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">积跬步，至千里。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Hello2Jason/" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://www.weibo.com/u/2585818074" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-this总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      this 总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JavaScript中的this的指向常常令人感到疑惑，我们来总结一下this指向的规律。</p>
+<p>首先我们先说明对于this指向的两个误解。</p>
+<p>this既不会指向函数本身也不会指向函数的词法作用域，它的指向是在函数调用时发生绑定，仅与在哪里被调用有关系。</p>
+<p>绑定规则：</p>
+<ol>
+<li><p>默认绑定</p>
+<p>顾名思义，这一绑定规则是在其他规则都不适用的情况下的默认使用规则，当函数直接使用不带任何修饰的函数引用进行调用时，它的this指向全局对象，在浏览器中就为Window，这里要注意，在函数声明在严格模式下的时候，默认绑定中的this指向undefined，并且只有在函数声明中使用严格模式才会有这种情况，当仅在函数调用时使用严格模式的话，this仍然指向Window。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line">fn(); <span class="comment">// 1 采用默认规则 this 指向Window</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>隐式绑定</p>
+<p>隐式绑定是当函数作为某一对象的方法时，通过该对象的引用访问函数时该函数的this绑定到调用的对象上。同时也要注意，<strong><em>函数的this总是绑定到对象调用链的最后一个对象上（即距离函数最近的对象）。</em></strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">fn</span>: fn</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> y = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">2</span>,</div><div class="line">  <span class="attr">x</span>: x</div><div class="line">&#125;</div><div class="line">y.x.fn(); <span class="comment">// 1  隐式绑定 this 绑定到了调用链中直接包含该函数的对象x上</span></div></pre></td></tr></table></figure>
+<p>另外，隐式绑定时还需要注意，被隐式绑定的对象可能会丢失绑定对象，从而应用默认绑定。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  conosole.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">fn</span>: fn</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> y = x.fn;</div><div class="line">y(); <span class="comment">// 2 隐式丢失</span></div></pre></td></tr></table></figure>
+<p>造成隐式丢失的原因是，新创建的变量y也指向了fn这一函数，然后使用y调用该函数时相当于使用不带任何修饰的函数引用进行调用，所以使用的是默认绑定，函数中的this绑定到了全局变量Window。</p>
+<p>另外，利用JS函数First class function 的特性将函数作为参数传递的时候，也可能发生隐式丢失。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dofn</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">  func(); <span class="comment">// 传递参数的时候 相当于发生了 var func = x.fn;</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">fn</span>: fn</div><div class="line">&#125;</div><div class="line">dofn(x.fn); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<p>甚至把函数传入内置函数时的结果也是一样的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> x = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">fn</span>: fn</div><div class="line">&#125;</div><div class="line">setTimeout(x.fn, <span class="number">100</span>); <span class="comment">// 2</span></div><div class="line"><span class="comment">// 因为setTimeout的实现相当于：</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setTimeout</span>(<span class="params">fn, delay</span>) </span>&#123;</div><div class="line">  <span class="comment">// 延时 delay 毫秒</span></div><div class="line">  fn();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>显式绑定</p>
+<p>显式绑定是指通过使用JS提供的call()与apply()函数来显示地设置某一个函数的this所绑定的对象，这两个函数的区别在于，向绑定的函数传递参数的形式不同，call()直接传递单个变量，apply()传递一个数组，并将数组中每一项对应一个参数传递给函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span></div><div class="line">&#125;</div><div class="line">fn.call(x); <span class="comment">// 1</span></div><div class="line">fn.apply(x); <span class="comment">// 1</span></div></pre></td></tr></table></figure>
+<p>通过这两种方法给函数绑定的绑定this对象还是可以被修改，因此我们可以采取一种叫做硬绑定的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    foo.call(obj);</div><div class="line">&#125;</div><div class="line"></div><div class="line">bar.call(<span class="built_in">window</span>); <span class="comment">// 2 硬绑定的函数不能修改其 this 指向</span></div><div class="line"></div><div class="line"><span class="comment">// ES5 已经实现了此方法 就是 Function.prototype.bind()</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span>(<span class="params">fn, obj</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> fn.apply(obj, <span class="built_in">arguments</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>new绑定<br> new绑定就是当我们对某一函数使用new操作符时，函数体中的this会被绑定到刚实例化的一个新对象上。<br> new操作符实例化对象时进行的操作：</p>
+<pre><code>1. 创建一个新的对象
+2. 将新对象的原型（__proto__）指向构造函数的原型对象（.prototype）
+3. 将函数体内的this指向新创建的对象并执行函数体内的程序
+4. 如果函数没有返回一个对象则返回新创建的对象，否则返回指定对象
+</code></pre> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.a = x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> foo(<span class="number">2</span>);</div><div class="line"><span class="built_in">console</span>.log(obj.a); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>优先级<br> 以上规则就是会影响this绑定的所有情况，然后他们有一个优先级，保证在多种情况同时发生的情况下可以确定this的指向，他们的优先级是：</p>
+<pre><code>new绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定
+</code></pre></li>
+<li>一些例外情况：<ul>
+<li>当把null或者undefined传入call, apply, bind, 绑定后，函数会忽略他们然后采用默认绑定this绑定到全局对象</li>
+<li><code>(p.foo = o.foo)()</code> 这种情况会采用默认绑定</li>
+</ul>
+</li>
+<li>ES6箭头函数的this<br> ES6的箭头函数中的this的绑定机制与普通函数<strong><em>完全不同</em></strong>，它的this绑定机制更像是作用域链的词法作用域。 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj1 = &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">2</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj2 = &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">3</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bar = foo.call(obj1);</div><div class="line">bar.call(obj2); <span class="comment">// 2 而不是 3</span></div><div class="line"></div><div class="line"><span class="comment">// 与箭头函数一样的ES5写法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(that.a);</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">2</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bar = foo.call(obj);</div><div class="line">bar(); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/01/16/this总结/" class="archive-article-date">
+  	<time datetime="2017-01-16T08:46:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-16</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/27/JS获取元素位置以及大小的总结（含Jquery）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JS获取元素位置以及大小的总结（含Jquery）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jason Yang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/js/" style="font-size: 20px;">js</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

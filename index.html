@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>Jason&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="学习中的前端小白">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jason's Blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Jason's Blog">
+<meta property="og:description" content="学习中的前端小白">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jason's Blog">
+<meta name="twitter:description" content="学习中的前端小白">
+  
+    <link rel="alternative" href="/atom.xml" title="Jason&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/assets/imgs/logo.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jason Yang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">积跬步，至千里。</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Hello2Jason/" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://www.weibo.com/u/2585818074" title="weibo">weibo</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Jason Yang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/assets/imgs/logo.png" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Jason Yang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">积跬步，至千里。</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Hello2Jason/" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://www.weibo.com/u/2585818074" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        
+  
+    <article id="post-this总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/16/this总结/">this 总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JavaScript中的this的指向常常令人感到疑惑，我们来总结一下this指向的规律。</p>
+<p>首先我们先说明对于this指向的两个误解。</p>
+<p>this既不会指向函数本身也不会指向函数的词法作用域，它的指向是在函数调用时发生绑定，仅与在哪里被调用有关系。</p>
+<p>绑定规则：</p>
+<ol>
+<li><p>默认绑定</p>
+<p>顾名思义，这一绑定规则是在其他规则都不适用的情况下的默认使用规则，当函数直接使用不带任何修饰的函数引用进行调用时，它的this指向全局对象，在浏览器中就为Window，这里要注意，在函数声明在严格模式下的时候，默认绑定中的this指向undefined，并且只有在函数声明中使用严格模式才会有这种情况，当仅在函数调用时使用严格模式的话，this仍然指向Window。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line">fn(); <span class="comment">// 1 采用默认规则 this 指向Window</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>隐式绑定</p>
+<p>隐式绑定是当函数作为某一对象的方法时，通过该对象的引用访问函数时该函数的this绑定到调用的对象上。同时也要注意，<strong><em>函数的this总是绑定到对象调用链的最后一个对象上（即距离函数最近的对象）。</em></strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">fn</span>: fn</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> y = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">2</span>,</div><div class="line">  <span class="attr">x</span>: x</div><div class="line">&#125;</div><div class="line">y.x.fn(); <span class="comment">// 1  隐式绑定 this 绑定到了调用链中直接包含该函数的对象x上</span></div></pre></td></tr></table></figure>
+<p>另外，隐式绑定时还需要注意，被隐式绑定的对象可能会丢失绑定对象，从而应用默认绑定。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  conosole.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">fn</span>: fn</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> y = x.fn;</div><div class="line">y(); <span class="comment">// 2 隐式丢失</span></div></pre></td></tr></table></figure>
+<p>造成隐式丢失的原因是，新创建的变量y也指向了fn这一函数，然后使用y调用该函数时相当于使用不带任何修饰的函数引用进行调用，所以使用的是默认绑定，函数中的this绑定到了全局变量Window。</p>
+<p>另外，利用JS函数First class function 的特性将函数作为参数传递的时候，也可能发生隐式丢失。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dofn</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">  func(); <span class="comment">// 传递参数的时候 相当于发生了 var func = x.fn;</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">fn</span>: fn</div><div class="line">&#125;</div><div class="line">dofn(x.fn); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<p>甚至把函数传入内置函数时的结果也是一样的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> x = <span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">fn</span>: fn</div><div class="line">&#125;</div><div class="line">setTimeout(x.fn, <span class="number">100</span>); <span class="comment">// 2</span></div><div class="line"><span class="comment">// 因为setTimeout的实现相当于：</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setTimeout</span>(<span class="params">fn, delay</span>) </span>&#123;</div><div class="line">  <span class="comment">// 延时 delay 毫秒</span></div><div class="line">  fn();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>显式绑定</p>
+<p>显式绑定是指通过使用JS提供的call()与apply()函数来显示地设置某一个函数的this所绑定的对象，这两个函数的区别在于，向绑定的函数传递参数的形式不同，call()直接传递单个变量，apply()传递一个数组，并将数组中每一项对应一个参数传递给函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> x = &#123;</div><div class="line">  <span class="attr">a</span>: <span class="number">1</span></div><div class="line">&#125;</div><div class="line">fn.call(x); <span class="comment">// 1</span></div><div class="line">fn.apply(x); <span class="comment">// 1</span></div></pre></td></tr></table></figure>
+<p>通过这两种方法给函数绑定的绑定this对象还是可以被修改，因此我们可以采取一种叫做硬绑定的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    foo.call(obj);</div><div class="line">&#125;</div><div class="line"></div><div class="line">bar.call(<span class="built_in">window</span>); <span class="comment">// 2 硬绑定的函数不能修改其 this 指向</span></div><div class="line"></div><div class="line"><span class="comment">// ES5 已经实现了此方法 就是 Function.prototype.bind()</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span>(<span class="params">fn, obj</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> fn.apply(obj, <span class="built_in">arguments</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>new绑定<br> new绑定就是当我们对某一函数使用new操作符时，函数体中的this会被绑定到刚实例化的一个新对象上。<br> new操作符实例化对象时进行的操作：</p>
+<pre><code>1. 创建一个新的对象
+2. 将新对象的原型（__proto__）指向构造函数的原型对象（.prototype）
+3. 将函数体内的this指向新创建的对象并执行函数体内的程序
+4. 如果函数没有返回一个对象则返回新创建的对象，否则返回指定对象
+</code></pre> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.a = x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> foo(<span class="number">2</span>);</div><div class="line"><span class="built_in">console</span>.log(obj.a); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>优先级<br> 以上规则就是会影响this绑定的所有情况，然后他们有一个优先级，保证在多种情况同时发生的情况下可以确定this的指向，他们的优先级是：</p>
+<pre><code>new绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定
+</code></pre></li>
+<li>一些例外情况：<ul>
+<li>当把null或者undefined传入call, apply, bind, 绑定后，函数会忽略他们然后采用默认绑定this绑定到全局对象</li>
+<li><code>(p.foo = o.foo)()</code> 这种情况会采用默认绑定</li>
+</ul>
+</li>
+<li>ES6箭头函数的this<br> ES6的箭头函数中的this的绑定机制与普通函数<strong><em>完全不同</em></strong>，它的this绑定机制更像是作用域链的词法作用域。 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj1 = &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">2</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj2 = &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">3</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bar = foo.call(obj1);</div><div class="line">bar.call(obj2); <span class="comment">// 2 而不是 3</span></div><div class="line"></div><div class="line"><span class="comment">// 与箭头函数一样的ES5写法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(that.a);</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">2</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bar = foo.call(obj);</div><div class="line">bar(); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/01/16/this总结/" class="archive-article-date">
+  	<time datetime="2017-01-16T08:46:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-16</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-JS获取元素位置以及大小的总结（含Jquery）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/27/JS获取元素位置以及大小的总结（含Jquery）/">JS获取元素位置以及大小的总结（含Jquery）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结一下平时编码中常用的获取元素位置以及大小的方法。</p>
+<p>获取元素位置：</p>
+<p>原生JS：</p>
+<p>原生JS中每个元素都有offsetLeft, offsetRight, offsetHeight, offsetWidth, offsetParent属性，通过这些属性口语获取元素的大小以及位置的<em>数值</em>，也可以使用元素的clientWidth和clientHeight属性来取得它的大小，这两个元素通常是用来取得浏览器视口大小的。它们的使用也有需要注意的地方。</p>
+<p>offsetLeft 和 offsetRight 对于块级元素取得的是元素相对于包含它的<em>父元素</em>之间的距离，对于行内元素offsetLeft和offsetRight取得的是元素第一个边界相对于其父元素的距离,offsetParent指向当前元素的<em>最近包含父元素</em>，但是通常情况下，我们都想要获取元素相对于浏览器边框的距离，于是我们需要自己封装一个函数来达到这一目的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getElementLeft</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> actualLeft = element.offsetLeft;</div><div class="line">  <span class="keyword">var</span> current = element.offsetParent;</div><div class="line">  <span class="comment">// 当元素为最外层元素（没有包含父元素时offsetParent为null</span></div><div class="line">  <span class="keyword">while</span>(current !== <span class="literal">null</span>) &#123;  </div><div class="line">    actualLeft += current.offsetLeft;</div><div class="line">    current = current.offsetParent;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> actualLeft;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getElementTop</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> actualTop = element.offsetTop;</div><div class="line">  <span class="keyword">var</span> current = element.offsetParent;</div><div class="line">  <span class="comment">// 当元素为最外层元素（没有包含父元素时offsetParent为null</span></div><div class="line">  <span class="keyword">while</span>(current !== <span class="literal">null</span>) &#123;  </div><div class="line">    actualTop += current.offsetTop;</div><div class="line">    current = current.offsetParent;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> actualTop;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>关于offsetWidth和offsetHeight对于块级元素，返回的数值为包括盒子模型的border的宽和高；而对于行内元素，它们则表示能够框住整个元素的最小矩形的宽和高。这里对于块级元素使用它们时还要注意与clientWidth与clientHeight的区别，client不包含盒子模型的border。</p>
+<p>对于Jquery，要获取元素的大小及位置主要通过几个方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#id"</span>).offset().left;</div><div class="line">$(<span class="string">"#id"</span>).offset().top;</div><div class="line">$(<span class="string">"#id"</span>).height();</div><div class="line">$(<span class="string">"#id"</span>).width();</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/12/27/JS获取元素位置以及大小的总结（含Jquery）/" class="archive-article-date">
+  	<time datetime="2016-12-27T09:25:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-27</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-闭包总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/28/闭包总结/">闭包总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JavaScript中的闭包，一般的定义是：<em>有权访问另一个函数作用域中变量的函数</em> ，这个定义说得不是很清楚，接下来用例子来详细解释。</p>
+<p>我们都知道JS中没有快级作用域，能够建立新作用域的方法，只有新建函数，在一个函数内部的变量是属于这个函数的作用域的，在它外部的作用域中无法直接访问到它当中的变量，但是这个函数当中却有权访问它<strong>声明</strong>时候的外部作用域中的变量，这个是因为JS的作用域链这个机制：<em>每一个函数都有权访问它声明位置外部的作用域内的变量</em> 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> y = <span class="number">2</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">  <span class="built_in">console</span>.log(y)  <span class="comment">// 2</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(x);  <span class="comment">// error undefined</span></div></pre></td></tr></table></figure>
+<p>上面一段代码演示了函数作用域以及作用域链，有一点需要注意的是，当不使用严格模式时，如果定义变量之前不加<code>var</code>，这个变量就会被定义为全局变量，所有的作用域中都可以访问到。</p>
+<p>在JS中有很多时候都需要使用另一个函数作用域中的变量，这时候就要使用闭包了，按照之前的我们知道函数作用域链，在函数内部声明的函数可以访问到该函数作用域中的变量，我们如果将这个内部的函数返回给最外部作用域中的一个变量，就可以通过这个变量指向的函数来访问它原本访问不到的函数作用域中的变量了。</p>
+<p>以上描述之所以能够实现，还有一个重要的因素，那就是JS中的函数不仅是对象，同时也是一级函数(First Class Function)，一级函数的意思就是你可以对这个函数作与所有其他变量能做的操作，比如将函数作为一个函数的返回值，或者将它作为参数传递给一个函数等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> arr = [];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">    arr[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(i);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> fn = createFn();</div><div class="line">fn[<span class="number">0</span>]();  <span class="comment">// 3</span></div><div class="line">fn[<span class="number">1</span>]();  <span class="comment">// 3</span></div><div class="line">fn[<span class="number">2</span>]();  <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<p>如上代码所示，最后在全局作用域中调用createFn()，我们就可以在全局作用域中访问到原本无法访问的createFn()函数作用域中的变量i，这就是闭包的作用。因为i对于被返回的函数来说是可以通过作用域链访问到的。</p>
+<p>虽然最后访问到了i，但是我们可以看到，结果与我们所期望的似乎不同，最后返回的数组中每一个函数执行的结果都是返回3，这个就要从闭包产生的过程来解释了，首先当以上JS文件加载完成后，会先建立全局执行环境，在创建阶段将声明的函数以及变量名称保存在内存中，执行阶段一行一行执行代码，执行到调用createFn()时，创建createFn函数的执行环境，同样的创建阶段保存声明，执行阶段执行函数内的代码，执行完成后返回arr，然后清除调这个函数的执行环境，清除执行环境后，本来里面的变量以及函数都将被垃圾回收机制清理，但是由于全局变量中的变量fn引用了arr，于是arr以及其中用到的变量i都不会被清理掉仍保存在内存空间中，然后到了执行数组中每一个函数的时候首先会创建函数的执行环境，然后执行函数时，发现函数中会用到变量i，由于变量i对于执行的函数使能够通过作用域链访问到的，变量i就存在于函数fn的闭包中，能够访问到，然后因为执行fn时变量i的值为之前执行玩createFn后最后保存的值3，于是就会返回3，数组中的另外两个函数也同理，它们都是访问的同一个内存中的变量i，值都相等为3。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> arr = [];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</div><div class="line">      arr[j] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(j);</div><div class="line">      &#125;</div><div class="line">    &#125;(i))</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上代码解决了这个问题，让数组中每个函数返回不同的值，因为在for循环中加入了一个<em>立即调用函数(IIFE)</em>，并把变量i传给了这个函数，这样在每次for循环执行的时候都会创建一个新的执行环境，并在其中创建一个变量j保存当前i的值，然后同理j不会在执行结束后被垃圾回收机制回收，因为返回的arr中引用了j，于是每个不同的arr中函数所访问的都是存储在不同内存空间中的变量j。除了此方法外，还可以以使用ES6中的 <code>let</code> 语句来定义变量解决这个问题，使用这个语句定义的变量存在于块级作用域中，即最近的<code>{}</code>内，于是和IIFE的原理相同。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/28/闭包总结/" class="archive-article-date">
+  	<time datetime="2016-11-28T07:35:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-28</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-深入理解CSS：padding" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/21/深入理解CSS：padding/">深入理解CSS：padding</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><h4 id="padding与元素的尺寸"><a href="#padding与元素的尺寸" class="headerlink" title="padding与元素的尺寸"></a>padding与元素的尺寸</h4><p>对于块级(block)元素</p>
+<p>padding会影响元素的尺寸；但是当width:auto或者box-sizing:border-box;时，padding<em>不会影响元素的尺寸</em>(有例外！)，只会压缩内容区域的尺寸，但是如果padding的尺寸过大时，也会影响元素尺寸。</p>
+<p>总结：</p>
+<ol>
+<li>padding值暴走，一定会影响元素尺寸</li>
+<li>width非auto并且box-sizing非border-box时，padding影响尺寸</li>
+<li>width为auto或box-sizing为border-box，同时padding值没有暴走，不影响尺寸</li>
+</ol>
+<p><strong>对于内联(inline)元素</strong></p>
+<p>水平padding影响元素尺寸，垂直padding不影响尺寸，但是水平和垂直padding都会影响元素的背景区域大小，会影响scrollHeight。</p>
+<p>应用：</p>
+<p>实现高度可控的分隔线</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">注册&lt;span&gt;&lt;/span&gt;退出登陆</div><div class="line">&lt;style&gt;</div><div class="line">	span &#123;</div><div class="line">      padding: 10px 6px 1px; /*设置分割线距离右边的位置以及长短*/</div><div class="line">      margin-left: 12px; /*设置分隔线距离左边的位置*/</div><div class="line">      border-left: 2px solid; /*实现分隔线*/</div><div class="line">      font-size: 0;</div><div class="line">	&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><h4 id="padding负值与百分比值"><a href="#padding负值与百分比值" class="headerlink" title="padding负值与百分比值"></a>padding负值与百分比值</h4><p><em>padding不支持任何形式的负值</em></p>
+<p><strong>对于块级元素</strong></p>
+<p>padding的百分比值与margin类似，均是相对于父元素的宽度计算的。</p>
+<p>应用：</p>
+<p>实现一个正方形：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">  padding: 50%;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>移动端的正方形头图可以使用这种方法，兼容性比较好。</p>
+<p><strong>对于内联元素</strong></p>
+<ol>
+<li><p>同样相对于宽度计算</p>
+</li>
+<li><p>默认的高度宽度细节有差异</p>
+<p>空的内联元素加padding为50%时，高宽也不相等，因为inline元素的垂直padding会让“幽灵空白节点(strut)“显现。设置”font-size:0;”可以解决。</p>
+</li>
+<li><p>padding会断行</p>
+<p>当标签内用文字时，如果文字换行了，padding也会跟着文字换行。</p>
+</li>
+</ol>
+</li>
+<li><h4 id="标签元素的内置padding"><a href="#标签元素的内置padding" class="headerlink" title="标签元素的内置padding"></a>标签元素的内置padding</h4><ol>
+<li><p>ol/ul列表</p>
+<p>元素很多内置margin/padding值一般都以em为单位，但是ol/ul元素内置padding-left的单位是px不是em，例如在chrome中是40px；所以如果字号很小，间距就会很开，如果字号很大，序号就会爬到容器外面。</p>
+<p>技巧：网页文字一般大小是12-14px，ol/ul的padding设置为22-25px比较对齐。</p>
+</li>
+<li><p>表单元素的内置padding</p>
+<ul>
+<li><p>所有浏览器input/textarea输入框内置padding</p>
+</li>
+<li><p>所有浏览器button按钮内置padding</p>
+</li>
+<li><p>部分浏览器select下拉内置padding，如firefox IE8+可以设置padding</p>
+</li>
+<li><p>所有浏览器radio/checkbox单复选框无内置padding</p>
+</li>
+<li><p>button按钮元素的padding最难控制！</p>
+<p>chrome浏览器没问题</p>
+<p>firfox设置padding:0左右仍然有padding，<code>button:-moz-focus-inner { padding: 0}</code>可以解决。</p>
+<p>padding高度的计算各个浏览器不兼容，解决方案：</p>
+<p><code>&lt;a&gt;</code>标签模拟</p>
+<p>表单需要用内置<code>&lt;button&gt;</code>时，可以用<code>&lt;label&gt;</code>标签解决：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;button id=&quot;btn&quot;&gt;&lt;/button&gt; &lt;!--将button标签”可访问性隐藏“--&gt;</div><div class="line">&lt;label for=&quot;btn&quot;&gt;按钮&lt;/label&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><h4 id="padding与图形绘制"><a href="#padding与图形绘制" class="headerlink" title="padding与图形绘制"></a>padding与图形绘制</h4><p>实现三道杠图形：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;line-tri&quot;&gt;&lt;/div&gt;</div><div class="line"></div><div class="line">.line-tri &#123;</div><div class="line">  width: 150px;</div><div class="line">  height: 30px;</div><div class="line">  padding: 15px 0;</div><div class="line">  border-top: 30px solid; /*第一道杠*/</div><div class="line">  border-bottom: 30px solid; /*第二道杠*/</div><div class="line">  background-color: black; /*第三道杠*/</div><div class="line">  background-clip: content-box; /*CSS属性，让背景只存在于盒子的内容区域*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实现白眼效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;</div><div class="line">.eye &#123;</div><div class="line">  width: 150px;</div><div class="line">  height: 150px;</div><div class="line">  padding: 10px;</div><div class="line">  border: 10px solid;</div><div class="line">  border-radius: 50%;</div><div class="line">  background-color: black;</div><div class="line">  background-clip: content-box;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><h4 id="padding布局实践"><a href="#padding布局实践" class="headerlink" title="padding布局实践"></a>padding布局实践</h4><ul>
+<li><p>1:1布局的头图</p>
+<p><code>padding:50%;</code></p>
+</li>
+<li><p>配合margin实现等高布局</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">.box &#123;</div><div class="line">  overflow: hidden;</div><div class="line">  resize: vertical;</div><div class="line">&#125;</div><div class="line">.child-orange,</div><div class="line">.child-green &#123;</div><div class="line">  margin-bottom: -600px;</div><div class="line">  padding-bottom: 600px;</div><div class="line">&#125;</div><div class="line">.child-orange &#123;</div><div class="line">  float: left;</div><div class="line">  background: orange;</div><div class="line">&#125;</div><div class="line">.child-green &#123;</div><div class="line">  float: left;</div><div class="line">  background: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>两栏自适应布局</p>
+<p>padding在容器上:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;pbox&quot;&gt;</div><div class="line">	&lt;img src=&quot;mm.jpg&quot;&gt;</div><div class="line">	文本内容</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">.pbox &#123;</div><div class="line">  padding-left: 120px;</div><div class="line">&#125;</div><div class="line">.pbox img &#123;</div><div class="line">  float: left;</div><div class="line">  margin-left: -120px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>padding在子元素上:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">	&lt;img src=&quot;mm.jpg&quot;&gt;</div><div class="line">	&lt;div class=&quot;auto&quot;&gt;文本内容&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">img &#123;</div><div class="line">  float: left;</div><div class="line">&#125;</div><div class="line">.auto &#123;</div><div class="line">  padding-left: 120px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/21/深入理解CSS：padding/" class="archive-article-date">
+  	<time datetime="2016-11-21T08:43:45.269Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-JS Execution Environment" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/10/JS Execution Environment/">JavaScript 执行环境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    在JS中，每当一个JS文件被加载执行后，首先做的事情是创建一个全局执行环境(Global Execution Environment)，在这个全局执行环境中会先生成一个变量对象(Variable Environment)、一个”this”指针(在浏览器中指向Window对象)、一个指向原型链的Outer Environment。</p>
+<p>​    然后创建执行环境分为两个阶段，第一个创建阶段的主要任务是，查看整个文档的代码，当发现变量或者函数声明语句后，在这个阶段会先建立这些变量以及函数在内存中的存放位置，同时如果是变量声明的话，这个阶段会将变量的值先设置为“undefined”，如果是函数声明的话，则会将整个函数的代码都存入内存中(函数提升)；然后第二个阶段称为执行阶段，在这个阶段中JS会一行一行地执行文件中的代码，这个时候如果之前声明的变量有赋值的话，才会对他进行赋值操作。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/10/JS Execution Environment/" class="archive-article-date">
+  	<time datetime="2016-10-10T08:55:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-10</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jason Yang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/js/" style="font-size: 20px;">js</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
