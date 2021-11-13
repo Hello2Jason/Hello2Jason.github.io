@@ -42,8 +42,6 @@ h2 {
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 48px;
-  line-height: 56px;
   margin: 0;
 }
 
@@ -337,6 +335,22 @@ a:focus {
   color: #fff;
 }
 
+.content h2 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+.content__about__section__desc__text {
+  display: flex;
+  align-items: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+}
+
 .content__about__section {
   padding: 0 32px;
 }
@@ -563,6 +577,8 @@ a:focus {
   }
   .content h2 {
     margin-bottom: 64px;
+    font-size: 48px;
+    line-height: 56px;
   }
   .content__about__section {
     width: 954px;
