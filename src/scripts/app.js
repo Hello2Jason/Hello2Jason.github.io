@@ -149,8 +149,12 @@ export default class App {
   tilt() {
     this.lastMouseX = this.tiltFx.lerp(this.lastMouseX, this.tiltFx.lineEq(6, 0, this.width, 0, this.mouseX), 0.05);
     const newScrollingPos = window.pageYOffset;
-    this.lastMouseY = this.tiltFx.lerp(this.lastMouseY, this.tiltFx.lineEq(0, 65, this.docheight, 0, newScrollingPos), 0.05);
-    this.lastScale = this.tiltFx.lerp(this.lastScale, this.tiltFx.lineEq(0, 158, this.docheight, 0, newScrollingPos), 0.05);
+    if (newScrollingPos > 800) {
+      this.lastMouseX = this.tiltFx.lerp(this.lastMouseX, this.tiltFx.lineEq(20, 0, this.width, 0, newScrollingPos), 0.05);
+    } else {
+      this.lastMouseY = this.tiltFx.lerp(this.lastMouseY, this.tiltFx.lineEq(0, 65, this.docheight, 0, newScrollingPos), 0.05);
+      this.lastScale = this.tiltFx.lerp(this.lastScale, this.tiltFx.lineEq(0, 158, this.docheight, 0, newScrollingPos), 0.05);
+    }
     this.camera.position.set(this.lastMouseX, this.lastMouseY, this.lastScale);
     this.requestId = requestAnimationFrame(() => this.tilt());
   }
