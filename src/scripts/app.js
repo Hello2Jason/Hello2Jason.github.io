@@ -28,7 +28,7 @@ export default class App {
     this.addCameraControls();
     this.addFloor();
     this.addBackgroundShape();
-    this.loadModels('https://hello2jason.github.io/buildings.obj', this.onLoadModelsComplete.bind(this));
+    this.loadModels('http://ant.resource.dreamtd.cn/buildings4.obj', this.onLoadModelsComplete.bind(this));
     this.animate();
 
     this.pointLightObj3 = {

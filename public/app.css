@@ -191,7 +191,7 @@ body {
   --color-link: #a9bab1;
   --color-link-hover: #48d7d5;
   background-color: var(--color-bg);
-  font-family: Futura, "futura-pt", Arial, sans-serif;
+  font-family: Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 300vh;
