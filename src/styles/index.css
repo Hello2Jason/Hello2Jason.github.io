@@ -598,4 +598,7 @@ a:focus {
     font-size: 16px;
     line-height: 24px;
   }
+  .content__economic__card img {
+    width: 107px;
+  }
 }

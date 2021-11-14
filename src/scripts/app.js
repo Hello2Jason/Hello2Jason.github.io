@@ -28,7 +28,7 @@ export default class App {
     this.addCameraControls();
     this.addFloor();
     this.addBackgroundShape();
-    this.loadModels('http://ant.resource.dreamtd.cn/buildings4.obj', this.onLoadModelsComplete.bind(this));
+    this.loadModels('https://cdn.dreamcapsule.top/buildings4.obj', this.onLoadModelsComplete.bind(this));
     this.animate();
 
     this.pointLightObj3 = {
