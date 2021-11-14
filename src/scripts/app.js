@@ -152,9 +152,9 @@ export default class App {
     const newScrollingPos = window.pageYOffset;
     if (newScrollingPos > 800) {
       this.lastMouseX = this.tiltFx.lerp(this.lastMouseX, this.tiltFx.lineEq(20, 0, this.width, 0, newScrollingPos), 0.05);
-      TweenMax.to(this.pointLight.color, 2, this.hexToRgbTreeJs('#00ff00'));
+      TweenMax.to(this.pointLight.color, 5, this.hexToRgbTreeJs('#00ff00'));
     } else {
-      TweenMax.to(this.pointLight.color, 2, this.hexToRgbTreeJs('#d3263a'));
+      TweenMax.to(this.pointLight.color, 5, this.hexToRgbTreeJs('#d3263a'));
       this.lastMouseY = this.tiltFx.lerp(this.lastMouseY, this.tiltFx.lineEq(0, 65, this.docheight, 0, newScrollingPos), 0.05);
       this.lastScale = this.tiltFx.lerp(this.lastScale, this.tiltFx.lineEq(0, 158, this.docheight, 0, newScrollingPos), 0.05);
     }
