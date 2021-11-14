@@ -10,6 +10,7 @@ THREE.OBJLoader  = OBJLoader;
 
 export default class App {
   init() {
+    this.pointLight = null;
     this.group = new THREE.Object3D();
     this.bgColor = window.getComputedStyle(document.body, null).getPropertyValue('background-color');
     this.gridSize = 40;
@@ -151,7 +152,9 @@ export default class App {
     const newScrollingPos = window.pageYOffset;
     if (newScrollingPos > 800) {
       this.lastMouseX = this.tiltFx.lerp(this.lastMouseX, this.tiltFx.lineEq(20, 0, this.width, 0, newScrollingPos), 0.05);
+      TweenMax.to(this.pointLight.color, 2, this.hexToRgbTreeJs('#00ff00'));
     } else {
+      TweenMax.to(this.pointLight.color, 2, this.hexToRgbTreeJs('#d3263a'));
       this.lastMouseY = this.tiltFx.lerp(this.lastMouseY, this.tiltFx.lineEq(0, 65, this.docheight, 0, newScrollingPos), 0.05);
       this.lastScale = this.tiltFx.lerp(this.lastScale, this.tiltFx.lineEq(0, 158, this.docheight, 0, newScrollingPos), 0.05);
     }
@@ -179,6 +182,7 @@ export default class App {
 
   addPointLight(params) {
     const pointLight = new THREE.PointLight(params.color, params.intensity);
+    this.pointLight = pointLight;
 
     pointLight.position.set(params.position.x, params.position.y, params.position.z);
 
@@ -288,5 +292,15 @@ export default class App {
     this.renderer.render(this.scene, this.camera);
 
     requestAnimationFrame(this.animate.bind(this));
+  }
+
+  hexToRgbTreeJs(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+    return result ? {
+      r: parseInt(result[1], 16) / 255,
+      g: parseInt(result[2], 16) / 255,
+      b: parseInt(result[3], 16) / 255
+    } : null;
   }
 }
